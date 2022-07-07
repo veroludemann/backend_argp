@@ -1,37 +1,43 @@
 package com.backend.Back.Service;
 
 import com.backend.Back.Entity.Persona;
-import com.backend.Back.Inteface.IPersonaService;
 import com.backend.Back.Repository.IPersonaRepository;
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
+
+@Transactional
 @Service
-public class ImpPersonaService implements IPersonaService {
-    @Autowired IPersonaRepository ipersonaRepositoty;
-
-    
-    @Override
-    public List<Persona> getPersona() {
-       List<Persona> persona = ipersonaRepositoty.findAll();
-       return persona;
+public class ImpPersonaService{
+    private final IPersonaRepository ipersonaRepositoty;
+      
+    @Autowired 
+    public ImpPersonaService(IPersonaRepository ipersonaRepositoty) {
+        this.ipersonaRepositoty = ipersonaRepositoty;
     }
 
-    @Override
-    public void savePersona(Persona persona) {
-        ipersonaRepositoty.save(persona);
+ public Persona addPersona(Persona persona) {
+        return ipersonaRepositoty.save(persona);
     }
 
-    @Override
-    public void deletePersona(Long id) {
-        ipersonaRepositoty.deleteById(id);
+    public List<Persona> findAllPersonas(){
+        return ipersonaRepositoty.findAll();
     }
 
-    @Override
-    public Persona findPersona(Long id) {
-        Persona persona = ipersonaRepositoty.findById(id).orElse(null);
-        return persona;
+    public Persona editPersona(Persona persona) {
+        return ipersonaRepositoty.save(persona);
+    }
+
+    public Persona findPersonaById(Long id) {
+        return ipersonaRepositoty.findPersonaById(id).orElseThrow(() -> new UserNotFoundException("El usuario de id" + id + "no fue encontrado"));
+    }
+
+    public void deletePersona(Long id){
+
+        ipersonaRepositoty.deletePersonaById(id);
     }
     
 }
