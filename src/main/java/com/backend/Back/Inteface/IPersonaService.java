@@ -1,4 +1,3 @@
-
 package com.backend.Back.Inteface;
 
 import com.backend.Back.Entity.Persona;
@@ -18,4 +17,3 @@ public interface IPersonaService {
     //Buscar una persona por id//
     public Persona findPersona(Long id);
 }
-
