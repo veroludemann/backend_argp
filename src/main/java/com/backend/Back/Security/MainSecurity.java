@@ -19,6 +19,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -31,8 +33,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 
 public class MainSecurity extends WebSecurityConfigurerAdapter{
-     @Autowired
-    UserDetailsImpl UserDetailsService;
+    
+    
+    @Autowired
+    UserDetailsImpl userDetailsService;
 
     @Autowired
     JwtEntryPoint jwtEntryPoint;
@@ -49,7 +53,7 @@ public class MainSecurity extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(UserDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Bean
@@ -68,9 +72,9 @@ public class MainSecurity extends WebSecurityConfigurerAdapter{
         http.cors().and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/auth/**").permitAll()
-		.antMatchers(HttpMethod.GET, "/persona/all").permitAll()
-		.antMatchers(HttpMethod.GET, "/experiencia/all").permitAll()
-		.antMatchers(HttpMethod.GET, "/educacion/all").permitAll()
+		//.antMatchers(HttpMethod.GET, "/persona/all").permitAll()
+		//.antMatchers(HttpMethod.GET, "/experiencia/all").permitAll()
+		//.antMatchers(HttpMethod.GET, "/educacion/all").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(jwtEntryPoint)
