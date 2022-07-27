@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 
@@ -72,6 +73,7 @@ public class MainSecurity extends WebSecurityConfigurerAdapter{
         http.cors().and().csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/auth/**").permitAll()
+                .antMatchers("/**").permitAll()
 		//.antMatchers(HttpMethod.GET, "/persona/all").permitAll()
 		//.antMatchers(HttpMethod.GET, "/experiencia/all").permitAll()
 		//.antMatchers(HttpMethod.GET, "/educacion/all").permitAll()
