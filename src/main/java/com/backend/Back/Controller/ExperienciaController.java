@@ -45,10 +45,10 @@ public class ExperienciaController {
         return new ResponseEntity<>(newExperiencia, HttpStatus.CREATED);
     }
     
-    @PutMapping("/update")
-    public ResponseEntity <Experiencia> updateExperiencia(@RequestBody Experiencia experiencia){
-        Experiencia updateExperiencia = experienciaService.updateExperiencia(experiencia);
-        return new ResponseEntity<>(updateExperiencia, HttpStatus.OK);
+    @PutMapping("/edit")
+    public ResponseEntity <Experiencia> editExperiencia(@RequestBody Experiencia experiencia){
+        Experiencia editExperiencia = experienciaService.editExperiencia(experiencia);
+        return new ResponseEntity<>(editExperiencia, HttpStatus.OK);
     }
     
     @DeleteMapping("/delete/{id}")

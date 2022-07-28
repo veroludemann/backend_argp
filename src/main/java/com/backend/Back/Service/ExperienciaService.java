@@ -29,7 +29,7 @@ public class ExperienciaService {
         return experienciaRepository.findAll();
     }
     
-    public Experiencia updateExperiencia(Experiencia experiencia){
+    public Experiencia editExperiencia(Experiencia experiencia){
         return experienciaRepository.save(experiencia);
     }
     
