@@ -28,11 +28,16 @@ public class ExperienciaService {
     public List<Experiencia> findAllExperiencia(){
         return experienciaRepository.findAll();
     }
-    
-    public Experiencia editExperiencia(Experiencia experiencia){
+      
+     public Experiencia editExperiencia(Experiencia experiencia) {
+        try {
+            findExperienciaById(experiencia.getId());
+        } catch (Exception e) {
+            return new Experiencia();
+        }
         return experienciaRepository.save(experiencia);
     }
-    
+  
     public List<Experiencia> findAllExperiencias(){
         return experienciaRepository.findAll();
                   
