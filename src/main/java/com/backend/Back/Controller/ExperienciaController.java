@@ -33,12 +33,6 @@ public class ExperienciaController {
         return new ResponseEntity<>(experiencias, HttpStatus.OK);
     }
     
-    @GetMapping("/find/{id}")
-    public ResponseEntity <Experiencia> getExperienciaById (@PathVariable("id") Long id) {
-        Experiencia experiencia = experienciaService.findExperienciaById(id);
-        return new ResponseEntity<>(experiencia, HttpStatus.OK);
-    }
-    
     @PostMapping("/add")
     public ResponseEntity <Experiencia> addExperiencia(@RequestBody Experiencia experiencia){
         Experiencia newExperiencia = experienciaService.addExperiencia(experiencia);

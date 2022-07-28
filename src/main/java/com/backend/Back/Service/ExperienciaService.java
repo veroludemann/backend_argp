@@ -14,22 +14,29 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 public class ExperienciaService {
-    private final ExperienciaRepository experienciaRepository;
-
+    
     @Autowired
-    public ExperienciaService(ExperienciaRepository experienciaRepository) {
-        this.experienciaRepository = experienciaRepository;
-    }
+    private ExperienciaRepository experienciaRepository;
     
-    public Experiencia addExperiencia(Experiencia experiencia){
-        return experienciaRepository.save(experiencia);
-    }
-    
-    public List<Experiencia> findAllExperiencia(){
+       
+    public List<Experiencia> findAllExperiencias(){
         return experienciaRepository.findAll();
     }
-      
-     public Experiencia editExperiencia(Experiencia experiencia) {
+    
+     public Experiencia addExperiencia(Experiencia experiencia){
+        return experienciaRepository.save(experiencia);
+    }
+     
+     public void deleteExperiencia(Long id) {
+        experienciaRepository.deleteExperienciaById(id);
+    }
+     
+     public Experiencia findExperienciaById(Long id) {
+        return experienciaRepository.findExperienciaById(id).orElseThrow(
+        () -> new UserNotFoundException("Educacion " + id + "no existe"));
+    }
+     
+      public Experiencia editExperiencia(Experiencia experiencia) {
         try {
             findExperienciaById(experiencia.getId());
         } catch (Exception e) {
@@ -37,20 +44,4 @@ public class ExperienciaService {
         }
         return experienciaRepository.save(experiencia);
     }
-  
-    public List<Experiencia> findAllExperiencias(){
-        return experienciaRepository.findAll();
-                  
-    }
-
-    public void deleteExperiencia(Long id) {
-        experienciaRepository.deleteExperienciaById(id);
-    }
-
-    public Experiencia findExperienciaById(Long id) {
-        return experienciaRepository.findExperienciaById(id);
-         
-    }
-
-   
 }
