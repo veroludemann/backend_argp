@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,12 +40,14 @@ public class EducacionController {
         return new ResponseEntity<>(newEducacion, HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/edit")
     public ResponseEntity<Educacion> editEducacion(@RequestBody Educacion educacion) {
         Educacion editEducacion = educacionService.editEducacion(educacion);
         return new ResponseEntity<>(editEducacion, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteEducacion(@PathVariable("id") Long id) {
         educacionService.deleteEducacion(id);

@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,13 +39,13 @@ public class ExperienciaController {
         Experiencia newExperiencia = experienciaService.addExperiencia(experiencia);
         return new ResponseEntity<>(newExperiencia, HttpStatus.CREATED);
     }
-    
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/edit")
     public ResponseEntity <Experiencia> editExperiencia(@RequestBody Experiencia experiencia){
         Experiencia editExperiencia = experienciaService.editExperiencia(experiencia);
         return new ResponseEntity<>(editExperiencia, HttpStatus.OK);
     }
-    
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity <?> deleteExperiencia(@PathVariable("id") Long id){
         experienciaService.deleteExperiencia(id);
