@@ -42,21 +42,21 @@ public class PersonaController {
         return new ResponseEntity<>(person, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/add")
     public ResponseEntity<Persona> addPersona(@RequestBody Persona persona) {
         Persona newPersona = impPersonaService.addPersona(persona);
         return new ResponseEntity<>(newPersona, HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/edit")
     public ResponseEntity<Persona> editPersona(@RequestBody Persona persona) {
         Persona editPersona = impPersonaService.editPersona(persona);
         return new ResponseEntity<>(editPersona, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deletePersona(@PathVariable("id") Long id) {
         impPersonaService.deletePersona(id);

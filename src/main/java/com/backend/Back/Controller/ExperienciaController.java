@@ -39,13 +39,13 @@ public class ExperienciaController {
         Experiencia newExperiencia = experienciaService.addExperiencia(experiencia);
         return new ResponseEntity<>(newExperiencia, HttpStatus.CREATED);
     }
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/edit")
     public ResponseEntity <Experiencia> editExperiencia(@RequestBody Experiencia experiencia){
         Experiencia editExperiencia = experienciaService.editExperiencia(experiencia);
         return new ResponseEntity<>(editExperiencia, HttpStatus.OK);
     }
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity <?> deleteExperiencia(@PathVariable("id") Long id){
         experienciaService.deleteExperiencia(id);

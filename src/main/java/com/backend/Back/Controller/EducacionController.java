@@ -40,14 +40,14 @@ public class EducacionController {
         return new ResponseEntity<>(newEducacion, HttpStatus.CREATED);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/edit")
     public ResponseEntity<Educacion> editEducacion(@RequestBody Educacion educacion) {
         Educacion editEducacion = educacionService.editEducacion(educacion);
         return new ResponseEntity<>(editEducacion, HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    //@PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteEducacion(@PathVariable("id") Long id) {
         educacionService.deleteEducacion(id);
